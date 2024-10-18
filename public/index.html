@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .spinner-border {
+            display: none;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        .version-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-car"></i> Car Management System</a>
+            <span id="version-badge" class="version-badge">
+                <i class="fas fa-code-branch"></i> Loading version...
+            </span>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="alert alert-info text-center fade-in" role="alert">
+            <i class="fas fa-info-circle"></i> Welcome to the Car Management System! Manage your cars efficiently.
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4 fade-in">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i> Car Inventory
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="btn btn-primary" id="loadcars">
+                                <i class="fas fa-sync-alt"></i> Load Cars
+                            </button>
+                            <div class="spinner-border text-primary" role="status" id="loading-spinner">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="cars-table" class="table table-striped table-bordered" aria-label="Cars Table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Brand</th>
+                                        <th>Year Release</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 fade-in">
+                    <div class="card-header">
+                        <i class="fas fa-edit"></i> Edit Car Details
+                    </div>
+                    <div class="card-body">
+                        <form id="editCarForm" class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="carid">Car Id</label>
+                                <input type="text" class="form-control" id="carid" placeholder="Enter car id">
+                                <div class="invalid-feedback">Please provide a car id.</div>
+                            </div>
+                            <button class="btn btn-primary btn-block mb-3" id="loadcar">
+                                <i class="fas fa-search"></i> Load Car
+                            </button>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter car name" required>
+                                <div class="invalid-feedback">Please provide a car name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="brand">Brand</label>
+                                <input type="text" class="form-control" id="brand" placeholder="Enter car brand" required>
+                                <div class="invalid-feedback">Please provide a car brand.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <input type="number" class="form-control" id="year" placeholder="Enter year of release" required>
+                                <div class="invalid-feedback">Please provide a valid year.</div>
+                            </div>
+                            <button class="btn btn-success btn-block" id="add" type="submit">
+                                <i class="fas fa-plus-circle"></i> Add/Update Car
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2024 by roxsross. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+    <script type="module" src="../src/app.js"></script>
+    <script>
+        document.getElementById('loadcars').addEventListener('click', function() {
+            document.getElementById('loading-spinner').style.display = 'inline-block';
+            // Simulate loading
+            setTimeout(() => {
+                document.getElementById('loading-spinner').style.display = 'none';
+            }, 2000);
+        });
+
+        // Form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+</html>
