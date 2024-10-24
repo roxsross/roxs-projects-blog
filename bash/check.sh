@@ -59,7 +59,7 @@ install_dependencies() {
             done
             ;;
         "centos"|"rhel"|"fedora")
-            packages=(sysstat lm-sensors net-tools)
+            packages=(sysstat lm_sensors net-tools)
             for package in "${packages[@]}"; do
                 if ! rpm -q $package &>/dev/null; then
                     log_message "INFO" "${GREEN}Instalando $package...${NC}"
