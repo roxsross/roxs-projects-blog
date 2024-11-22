@@ -14,4 +14,6 @@ $ kind create cluster
 ```
 kind create cluster --config kind-config.yaml
 ```
+## Eliminar clúster kind 🔗︎
 
+kind delete cluster --name=local-kind-cluster
