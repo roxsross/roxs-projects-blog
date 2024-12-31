@@ -20,7 +20,7 @@
 
 ---
 
-![RoxsRoss Banner](https://github.com/roxsross/roxsross/blob/main/images/roxsross-banner-1.png)
+![RoxsRoss Banner](https://media.licdn.com/dms/image/v2/D4D16AQF4ND-cC_uxZg/profile-displaybackgroundimage-shrink_350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1731367727725?e=1741219200&v=beta&t=9wrpURrkuzoztA0KBxcXE8lYeL8Qruoq9AyD63f3lJM)
 
 ## ¡Bienvenido al Blog de Proyectos de Roxs!
 
